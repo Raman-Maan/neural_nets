@@ -62,6 +62,13 @@ class XORCalculator {
   }
 
   /**
+   * Calculates the XOR of the two given parameters
+   */
+  calculate(x, y) {
+    return this.net.activate([x, y]);
+  }
+
+  /**
    * Ensure XOR calculation was correct
    * 
    * @param {Array} data_point A data point to test in the form of [x, x]
@@ -74,12 +81,39 @@ class XORCalculator {
   }
 }
 
-//create a 2-3-1 connected net
-let skynet = new XORCalculator(2, 3, 1);
-//giving a learning rate of 0.3 and iteration 10000 times, train our net!
-skynet.trainModel(0.3, 10000);
-//lets test out our net!
-skynet.testModel([0, 0], 0);
-skynet.testModel([0, 1], 1);
-skynet.testModel([1, 0], 1);
-skynet.testModel([1, 1], 0);
+function runSet(learning_rate, iterations) {
+  //create a 2-3-1 connected net
+  let skynet = new XORCalculator(2, 3, 1);
+  skynet.trainModel(learning_rate, iterations);
+  skynet.testModel([0, 0], 0);
+  skynet.testModel([0, 1], 1);
+  skynet.testModel([1, 0], 1);
+  skynet.testModel([1, 1], 0);
+}
+
+var _XORCalculator = new XORCalculator(2, 3, 1);
+_XORCalculator.trainModel(0.3, 1000);
+
+runSet(0.3, 1000);
+
+function runAllTests() {
+  //Lets see what it looks like with a very low learning rate of 0.000001 and small amount of iterations
+  runSet(0.000001, 100);
+
+  //Lets increase the learning rate a little and see as the iterations grow how the data changes
+  for (let i = 100; i < 10000; i += 100) {
+    runSet(0.001, i);
+  }
+
+  //lets do a ton of iterations now
+  runSet(0.001, 10000000);
+
+  //lets try bumping up the learning rate since it's definitely not adapting fast enough
+  runSet(0.1, 100);
+
+  //lets do more iterations with this better learning rate
+  runSet(0.1, 10000);
+
+  //lets tweak a little more
+  runSet(0.3, 100);
+}
