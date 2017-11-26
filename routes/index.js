@@ -7,4 +7,10 @@ router.get('/', function(req, res, next) {
   });
 });
 
+router.get('/xor', function(req, res) {
+  res.render('xor', {
+    title: 'XOR Calculator'
+  });
+});
+
 module.exports = router;
