@@ -1,1 +1,1 @@
-A repo holding some small bits of code as I learn how neural nets work
+A small application to hold various neural nets as I learn about them and experiment
