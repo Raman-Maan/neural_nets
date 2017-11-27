@@ -13,4 +13,10 @@ router.get('/xor', function(req, res) {
   });
 });
 
+router.get('/addition', function(req, res) {
+  res.render('addition', {
+    title: 'Addition Calculator'
+  });
+});
+
 module.exports = router;
