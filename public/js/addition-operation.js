@@ -32,8 +32,8 @@ class AdditionCalculator {
   trainModel(learning_rate, iterations) {
     this.net.clear();
     for(let i = 0; i < iterations; i++) {
-      for(let x = 0; x < this.max_addition_value/2; x++) {
-        for(let y = 0; y < this.max_addition_value/2; y++) {
+      for(let x = 0; x <= this.max_addition_value/2; x += 3) {
+        for(let y = 0; y <= this.max_addition_value/2; y += 2) {
           this.net.activate([this.normalizeValue(x), this.normalizeValue(y)]);
           this.net.propagate(learning_rate, [this.normalizeValue(x + y)]);
         }
@@ -60,7 +60,7 @@ class AdditionCalculator {
 }
 
 var _AdditionCalculator = new AdditionCalculator();
-_AdditionCalculator.trainModel(0.3, 10000);
+_AdditionCalculator.trainModel(0.3, 30000);
 
 for(let x = 0; x < _AdditionCalculator.max_addition_value/2; x++) {
   for(let y = 0; y < _AdditionCalculator.max_addition_value/2; y++) {
