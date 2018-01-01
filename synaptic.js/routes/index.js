@@ -19,4 +19,10 @@ router.get('/addition', function(req, res) {
   });
 });
 
+router.get('/better-addition', function(req, res) {
+  res.render('better-addition', {
+    title: 'Better Addition Calculator'
+  });
+});
+
 module.exports = router;
